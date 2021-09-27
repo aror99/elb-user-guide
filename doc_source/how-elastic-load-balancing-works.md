@@ -1,22 +1,14 @@
 # How Elastic Load Balancing works<a name="how-elastic-load-balancing-works"></a>
 
-A load balancer accepts incoming traffic from clients and routes requests to its registered targets \(such as EC2 instances\) in one or more Availability Zones\. The load balancer also monitors the health of its registered targets and ensures that it routes traffic only to healthy targets\. When the load balancer detects an unhealthy target, it stops routing traffic to that target\. It then resumes routing traffic to that target when it detects that the target is healthy again\.
+You configure your load balancer to accept incoming traffic by specifying one or more *listeners*\. A listener is a process that checks for connection requests\. 
 
-You configure your load balancer to accept incoming traffic by specifying one or more *listeners*\. A listener is a process that checks for connection requests\. It is configured with a protocol and port number for connections from clients to the load balancer\. Likewise, it is configured with a protocol and port number for connections from the load balancer to the targets\.
-
-Elastic Load Balancing supports the following types of load balancers:
-+ Application Load Balancers
-+ Network Load Balancers
-+ Gateway Load Balancers
-+ Classic Load Balancers
-
-There is a key difference in how the load balancer types are configured\. With Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, you register targets in target groups, and route traffic to the target groups\. With Classic Load Balancers, you register instances with the load balancer\.
+There is a key difference in how the load balancer types are configured\. With **Application Load Balancers, Network Load Balancers, and Gateway Load Balancers**, you register **targets in target groups, and route traffic to the target groups**\. With Classic Load Balancers, you register instances with the load balancer\.
 
 ## Availability Zones and load balancer nodes<a name="availability-zones"></a>
 
-When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone\. If you register targets in an Availability Zone but do not enable the Availability Zone, these registered targets do not receive traffic\. Your load balancer is most effective when you ensure that each enabled Availability Zone has at least one registered target\.
+**When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone**\. If you register targets in an Availability Zone but do not enable the Availability Zone, these registered targets do not receive traffic\. Your load balancer is most effective when you ensure that each enabled Availability Zone has at least one registered target\.
 
-We recommend enabling multiple Availability Zones for all load balancers\. With an Application Load Balancer however, it is a requirement that you enable at least two or more Availability Zones\. This configuration helps ensure that the load balancer can continue to route traffic\. If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone\.
+**We recommend enabling multiple Availability Zones for all load balancers**\. With an Application Load Balancer however, it is a requirement that you enable at least two or more Availability Zones\. This configuration helps ensure that the load balancer can continue to route traffic\. If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone\.
 
 After you disable an Availability Zone, the targets in that Availability Zone remain registered with the load balancer\. However, even though they remain registered, the load balancer does not route traffic to them\.
 
